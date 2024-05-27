@@ -1,0 +1,25 @@
+# NumPyで配列の操作や演算をしよう
+
+# Step1. NumPyをインポートするコードを記述する
+import numpy as np
+
+# Step2. AとBの行列を格納する多次元配列のコードを記述する
+A =np.array ([
+    [0,1],
+    [2,3],
+    [4,5]
+])
+
+B =np.array ([
+    [0,1,2,3],
+    [4,5,6,7]
+])
+
+# Step3. 行列の積の計算をするコードを記述する
+result = np.dot(A,B)
+
+# Step4. Step3.の計算結果を表示するコードを記述する
+print(result)
+
+# Step5. 行列の要素の最大値を求めるコードを記述する
+result.max()
