@@ -1,0 +1,30 @@
+#pip install japanize-matplotlib
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import japanize_matplotlib
+
+df = pd.read_csv("sample_data/sample_pandas_6.csv")
+
+category_df = pd.read_csv("category.csv")
+category_df
+
+df = pd.merge(df, category_df[['商品番号', 'カテゴリー']], how='inner', on='商品番号')
+
+#カテゴリー列の要素(弁当、デザートなど)の出現頻度をカウント
+category_counts = df['カテゴリー'].value_counts()
+
+#その結果を棒グラフで表示す
+category_counts.plot(kind='bar')
+plt.title("カテゴリー別出現頻度")
+plt.show()
+
+# 商品番号ごとに注文数の合計を計算
+total = df.groupby('カテゴリー')['注文数'].sum()
+print(total)
+print()
+print()
+
+# カテゴリーごとに注文数の基本統計量を取得
+category = df.groupby('カテゴリー')['注文数'].describe()
+print(category)
