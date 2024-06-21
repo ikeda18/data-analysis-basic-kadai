@@ -1,0 +1,87 @@
+"""
+from sklearn.datasets import load_wine
+import pandas as pd
+
+
+# ワイン（wine）のデータセットを呼び出している
+A = load_wine()
+
+# データフレームを作成し、種類の列も同時に追加
+df = pd.DataFrame(data=A.data, columns=A.feature_names)
+df['category'] = A.target
+
+
+# 説明変数（X：特徴）と目的変数（y：予測）を取り出す
+X = A.data
+y = A.target
+
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+#訓練データ、テストデータに分ける
+X_train, X_test, y_train, y_test = train_test_split(
+  X, y, test_size=0.3, random_state=5
+)
+
+
+#「訓練データ（7割のもの）」で学習モデルを作る
+model = DecisionTreeClassifier(random_state=5)
+model.fit(X_train, y_train)
+
+
+#「テストデータ（残りの3割）」で正解率を調べる
+pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, pred)
+
+
+print(f"正解率{accuracy*100}%")
+
+
+出力結果 → 正解率92.5925925925926%
+
+"""
+from sklearn.datasets import load_wine
+import pandas as pd
+
+
+# ワイン（wine）のデータセットを呼び出している
+A = load_wine()
+
+
+# データフレームを作成し、種類の列も同時に追加
+df = pd.DataFrame(data=A.data, columns=A.feature_names)
+df['category'] = A.target
+
+
+# 説明変数（X：特徴）と目的変数（y：予測）を取り出す
+X = A.data
+y = A.target
+
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+#訓練データ、テストデータに分ける
+X_train, X_test, y_train, y_test = train_test_split(
+  X, y, test_size=0.3, random_state=5
+)
+
+#「訓練データ（7割のもの）」で学習モデルを作る
+model = RandomForestClassifier(random_state=5)
+model.fit(X_train, y_train)
+
+
+#「テストデータ（残りの3割）」で正解率を調べる
+pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, pred)
+
+
+print(f"正解率{accuracy*100}%")
+
+#出力結果 → 正解率96.29629629629629%
+
+"""
+＜まとめ＞
+決定木モデルでの正解率が正解率92.5925925925926%
+ランダムフォレストモデルでの正解率が96.29629629629629%
